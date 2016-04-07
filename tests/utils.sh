@@ -10,10 +10,11 @@
 #
 #  If you're using my code you're welcome to connect with me on LinkedIn and optionally send me feedback to help improve or steer this or other code I publish
 #
-#  http://www.linkedin.com/in/harisekhon
+#  https://www.linkedin.com/in/harisekhon
 #
 
 set -eu
+[ -n "${DEBUG:-}" ] && set -x
 srcdir="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 
 hr(){
@@ -56,3 +57,14 @@ else
 fi
 
 . "$srcdir/excluded.sh"
+
+check(){
+    cmd=$1
+    msg=$2
+    if eval $cmd; then
+        echo "SUCCESS: $msg"
+    else
+        echo "FAILED: $msg"
+        exit 1
+    fi
+}
